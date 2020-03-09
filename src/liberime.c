@@ -413,6 +413,14 @@ static emacs_value get_commit(emacs_env *env, ptrdiff_t nargs, emacs_value args[
   return em_nil;
 }
 
+DOCSTRING(string_length, "STR", "Get context");
+static emacs_value string_length(emacs_env *env, ptrdiff_t nargs, emacs_value args[], void *data) {
+  char* str = em_get_string(env, args[0]);
+  int len = strlen(str);
+  return env->make_integer(env, len);
+}
+
+
 DOCSTRING(get_context, "", "Get context");
 static emacs_value get_context(emacs_env *env, ptrdiff_t nargs, emacs_value args[], void *data) {
   EmacsRime *rime = (EmacsRime*) data;
@@ -781,6 +789,9 @@ void liberime_init(emacs_env *env) {
   // user config
   DEFUN("liberime-get-user-config", get_user_config, 2, 3);
   DEFUN("liberime-set-user-config", set_user_config, 3, 4);
+
+  // Aux
+  DEFUN("liberime-string-length", string_length, 1, 1);
 
   // schema config
   // if schema id is nil/empty then get/set current schema config
