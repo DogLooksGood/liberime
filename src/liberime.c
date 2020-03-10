@@ -413,7 +413,7 @@ static emacs_value get_commit(emacs_env *env, ptrdiff_t nargs, emacs_value args[
   return em_nil;
 }
 
-DOCSTRING(string_length, "STR", "Get context");
+DOCSTRING(string_length, "STR", "A port of strlen in C.");
 static emacs_value string_length(emacs_env *env, ptrdiff_t nargs, emacs_value args[], void *data) {
   char* str = em_get_string(env, args[0]);
   int len = strlen(str);
